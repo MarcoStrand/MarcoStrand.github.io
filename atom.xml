@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>MarcoStrand&#39;s Blog</title>
+  
+  
+  <link href="http://localhost:4000/atom.xml" rel="self"/>
+  
+  <link href="http://localhost:4000/"/>
+  <updated>2023-01-30T13:54:48.053Z</updated>
+  <id>http://localhost:4000/</id>
+  
+  <author>
+    <name>Liu Hanzhang</name>
+    
+  </author>
+  
+  <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>My First Blog</title>
+    <link href="http://localhost:4000/2023/01/30/My-First-Blog/"/>
+    <id>http://localhost:4000/2023/01/30/My-First-Blog/</id>
+    <published>2023-01-30T13:51:48.000Z</published>
+    <updated>2023-01-30T13:54:48.053Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="5-arguement的使用"><a href="#5-arguement的使用" class="headerlink" title="5. arguement的使用"></a>5. arguement的使用</h2><p>当我们不确定有多少个参数传递的时候，可以通过arguement来获取。在js中，arguement实际上是当前函数的一个内置对象，所有函数都内置了一个arguement对象，arguement对象中存储了传递的所有实参</p><p>示例：</p><p> <code>function fn() &#123;</code></p><p>​      <code>console.log(arguement); //里面存储了所有传递过来的实参</code></p><p>​       <code>console.log(arguement.length);   //具有length属性</code></p><p>​    <code>&#125;</code></p><p>​    <code>fn(1,2,3)</code>;</p><p>arguement展示形式是一个伪数组，因此可以进行遍历，具有如下特点：</p><ul><li>具有length属性</li><li>按索引方式存储数据</li><li>不具有数组的push,pop等方法</li></ul>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h2 id=&quot;5-arguement的使用&quot;&gt;&lt;a href=&quot;#5-arguement的使用&quot; class=&quot;headerlink&quot; title=&quot;5. arguement的使用&quot;&gt;&lt;/a&gt;5. arguement的使用&lt;/h2&gt;&lt;p&gt;当我们不确定有多少个参数传递的时候，可以</summary>
+      
+    
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>Hello World</title>
+    <link href="http://localhost:4000/2023/01/30/hello-world/"/>
+    <id>http://localhost:4000/2023/01/30/hello-world/</id>
+    <published>2023-01-29T16:06:53.298Z</published>
+    <updated>2023-01-29T16:06:53.298Z</updated>
+    
+    <content type="html"><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p><h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p><h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p><h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p><h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;p&gt;Welcome to &lt;a href=&quot;https://hexo.io/&quot;&gt;Hexo&lt;/a&gt;! This is your very first post. Check &lt;a href=&quot;https://hexo.io/docs/&quot;&gt;documentation&lt;/a&gt; for</summary>
+      
+    
+    
+    
+    
+  </entry>
+  
+</feed>
