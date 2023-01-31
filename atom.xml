@@ -6,7 +6,7 @@
   <link href="http://localhost:4000/atom.xml" rel="self"/>
   
   <link href="http://localhost:4000/"/>
-  <updated>2023-01-31T16:00:24.135Z</updated>
+  <updated>2023-01-31T16:03:38.595Z</updated>
   <id>http://localhost:4000/</id>
   
   <author>
@@ -15,6 +15,26 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>JavaScript学习笔记——作用域与预解析</title>
+    <link href="http://localhost:4000/2023/02/01/JavaScript%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E2%80%94%E2%80%94%E4%BD%9C%E7%94%A8%E5%9F%9F%E4%B8%8E%E9%A2%84%E8%A7%A3%E6%9E%90/"/>
+    <id>http://localhost:4000/2023/02/01/JavaScript%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E2%80%94%E2%80%94%E4%BD%9C%E7%94%A8%E5%9F%9F%E4%B8%8E%E9%A2%84%E8%A7%A3%E6%9E%90/</id>
+    <published>2023-01-31T16:01:50.000Z</published>
+    <updated>2023-01-31T16:03:38.595Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="JS作用域"><a href="#JS作用域" class="headerlink" title="JS作用域"></a>JS作用域</h1><h2 id="1-作用域"><a href="#1-作用域" class="headerlink" title="1. 作用域"></a>1. 作用域</h2><p>就是代码名字（变量）在某个范围内起作用，目的是为了提高程序的可靠性，更重要的是减少命名冲突</p><p>js作用域（es6）之前：全局作用域和局部作用域</p><h3 id="全局作用域"><a href="#全局作用域" class="headerlink" title="全局作用域"></a>全局作用域</h3><p><strong>整个script标签</strong> 或者 是一个单独的js文件</p><h3 id="局部作用域（函数作用域）"><a href="#局部作用域（函数作用域）" class="headerlink" title="局部作用域（函数作用域）"></a>局部作用域（函数作用域）</h3><p><strong>在函数内部</strong>就是局部作用域 这个代码的名字只在函数内部起效果</p><h2 id="2-变量的作用域"><a href="#2-变量的作用域" class="headerlink" title="2. 变量的作用域"></a>2. 变量的作用域</h2><p>根据作用域的不同，分别全局变量和局部变量</p><h3 id="全局变量"><a href="#全局变量" class="headerlink" title="全局变量"></a>全局变量</h3><p>在全局作用域下的变量</p><p>注意：</p><ul><li>如果在函数内部没有声明直接赋值的变量也属于全局变量</li></ul><p>示例：</p><p>  <code>function fun()&#123;</code></p><p>​      <code>var num1 = 10;</code></p><p>​      <code>num2 = 20;  //函数内部没有声明直接赋值的变量</code></p><p>​    <code>&#125;</code></p><p>​    <code>fun();</code></p><p>​    <code>console.log(num1);  //运行错误，因为num1是一个局部变量，无法全局调用</code></p><p>​    <code>console.log(num2);  //20 运行成功，因为num2在函数内部没有声明，按全局变量处理</code></p><h3 id="局部变量"><a href="#局部变量" class="headerlink" title="局部变量"></a>局部变量</h3><p>在局部作用域下声明的变量叫做局部变量</p><p>注意：</p><ul><li><p>局部变量只能在该函数内部使用</p></li><li><p>函数内部var声明的变量是局部变量</p></li><li><p>函数的形参实际上就是局部变量</p></li></ul><h3 id="从执行效率来看全局变量和局部变量"><a href="#从执行效率来看全局变量和局部变量" class="headerlink" title="从执行效率来看全局变量和局部变量"></a>从执行效率来看全局变量和局部变量</h3><ul><li>全局变量只有浏览器关闭的时候才会销毁，比较占内存空间</li><li>局部变量当我们执行完毕就会销毁，比较节约资源</li></ul><h2 id="3-作用域链"><a href="#3-作用域链" class="headerlink" title="3. 作用域链"></a>3. 作用域链</h2><p>内部函数访问外部函数的变量，采取的是链式查找的方式来决定取哪个值，这种结构我们称为作用域链</p><p>就近原则</p><img src="/2023/02/01/JavaScript%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E2%80%94%E2%80%94%E4%BD%9C%E7%94%A8%E5%9F%9F%E4%B8%8E%E9%A2%84%E8%A7%A3%E6%9E%90/image-20230131165921665.png" style="zoom:80%;"><p>num输出值为20，一层一层向上找</p><ul><li><p>只要是代码，就只要有一个作用域</p></li><li><p>写在函数内部的局部作用域</p></li><li><p>如果函数中还有函数，那么在这个作用域中就又可以诞生一个作用域</p><img src="/2023/02/01/JavaScript%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E2%80%94%E2%80%94%E4%BD%9C%E7%94%A8%E5%9F%9F%E4%B8%8E%E9%A2%84%E8%A7%A3%E6%9E%90/image-20230131165250172.png" style="zoom:80%;"></li><li><p>根据在内部函数可以访问外部函数变量的这种机制，用链式查找决定哪些数据能被内部函数访问，就称作用域链</p></li></ul><h1 id="JS预解析"><a href="#JS预解析" class="headerlink" title="JS预解析"></a>JS预解析</h1><h2 id="1-预解析"><a href="#1-预解析" class="headerlink" title="1.预解析"></a>1.预解析</h2><p>js代码是通过浏览器中的js解析器来执行的，js引擎运行js分为两步：预解析 代码执行</p><p><strong>预解析</strong>：js引擎会把js所有var 还有function提升到当前作用于的最前面</p><p><strong>代码执行</strong>：按照代码书写的顺序从上往下执行</p><p>预解析分为：</p><h3 id="变量预解析（变量提升）"><a href="#变量预解析（变量提升）" class="headerlink" title="变量预解析（变量提升）"></a>变量预解析（变量提升）</h3><p>​       就是把所有的变量声明提升到<strong>当前作用域</strong>的最前面，不提升 赋值操作</p><img src="/2023/02/01/JavaScript%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E2%80%94%E2%80%94%E4%BD%9C%E7%94%A8%E5%9F%9F%E4%B8%8E%E9%A2%84%E8%A7%A3%E6%9E%90/image-20230131201508526.png" style="zoom:80%;"><h3 id="函数预解析（函数提升）"><a href="#函数预解析（函数提升）" class="headerlink" title="函数预解析（函数提升）"></a>函数预解析（函数提升）</h3><p>​       就是把所有的函数声明提升到当前作用域的最前面</p><p>案例：</p><p>  <code>var num = 10;</code></p><p>​    <code>fun();</code></p><p>​    <code>function fun() &#123;</code></p><p>​      <code>console.log(num);</code></p><p>​      <code>var num = 20;</code></p><p>​    <code>&#125;</code></p><p>​    <code>//相当于执行如下操作：</code></p><p>​    <code>var num;</code></p><p>​    <code>function fun() &#123;</code></p><p>​      <code>var num;</code></p><p>​      <code>console.log(num);  //就近原则，num=undefined</code></p><p>​      <code>num = 20;</code></p><p>​    <code>&#125;</code></p><p>​    <code>num = 10;</code></p><p>​    <code>fun();</code></p><img src="/2023/02/01/JavaScript%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E2%80%94%E2%80%94%E4%BD%9C%E7%94%A8%E5%9F%9F%E4%B8%8E%E9%A2%84%E8%A7%A3%E6%9E%90/image-20230131204651732.png" style="zoom:80%;">]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h1 id=&quot;JS作用域&quot;&gt;&lt;a href=&quot;#JS作用域&quot; class=&quot;headerlink&quot; title=&quot;JS作用域&quot;&gt;&lt;/a&gt;JS作用域&lt;/h1&gt;&lt;h2 id=&quot;1-作用域&quot;&gt;&lt;a href=&quot;#1-作用域&quot; class=&quot;headerlink&quot; title=&quot;1. </summary>
+      
+    
+    
+    
+    
+  </entry>
   
   <entry>
     <title>JavaScript学习笔记——对象</title>
