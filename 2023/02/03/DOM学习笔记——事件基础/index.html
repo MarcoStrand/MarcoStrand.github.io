@@ -1,0 +1,256 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"><title>DOM学习笔记——事件基础 | MarcoStrand's Blog</title><meta name="author" content="Liu Hanzhang"><meta name="copyright" content="Liu Hanzhang"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="获取元素如何获取页面元素：  根据ID获取 根据标签名获取 通过HTML5新增的方法获取 特殊元素获取  根据ID获取getElementById()方法可以获取带有ID的对象 示例： 123456&lt;div id&#x3D;&amp;#x27;time&amp;#x27;&gt;2023-1-1&lt;&#x2F;div&gt;&lt;script&gt;     var timer &#x3D; document.getElement">
+<meta property="og:type" content="article">
+<meta property="og:title" content="DOM学习笔记——事件基础">
+<meta property="og:url" content="http://localhost:4000/2023/02/03/DOM%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E2%80%94%E2%80%94%E4%BA%8B%E4%BB%B6%E5%9F%BA%E7%A1%80/index.html">
+<meta property="og:site_name" content="MarcoStrand&#39;s Blog">
+<meta property="og:description" content="获取元素如何获取页面元素：  根据ID获取 根据标签名获取 通过HTML5新增的方法获取 特殊元素获取  根据ID获取getElementById()方法可以获取带有ID的对象 示例： 123456&lt;div id&#x3D;&amp;#x27;time&amp;#x27;&gt;2023-1-1&lt;&#x2F;div&gt;&lt;script&gt;     var timer &#x3D; document.getElement">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://s3.bmp.ovh/imgs/2023/02/01/4d1d3d69f2327ffc.jpg">
+<meta property="article:published_time" content="2023-02-03T15:08:50.000Z">
+<meta property="article:modified_time" content="2023-02-03T15:13:58.045Z">
+<meta property="article:author" content="Liu Hanzhang">
+<meta property="article:tag" content="-DOM">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://s3.bmp.ovh/imgs/2023/02/01/4d1d3d69f2327ffc.jpg"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://localhost:4000/2023/02/03/DOM%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E2%80%94%E2%80%94%E4%BA%8B%E4%BB%B6%E5%9F%BA%E7%A1%80/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  }
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'DOM学习笔记——事件基础',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2023-02-03 23:13:58'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+    win.getCSS = url => new Promise((resolve, reject) => {
+      const link = document.createElement('link')
+      link.rel = 'stylesheet'
+      link.href = url
+      link.onload = () => resolve()
+      link.onerror = () => reject()
+      document.head.appendChild(link)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="MarcoStrand's Blog" type="application/atom+xml">
+</head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://s3.bmp.ovh/imgs/2023/02/01/4d1d3d69f2327ffc.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">7</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">7</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">2</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/feelings/"><i class="fa-fw fa fa-paper-plane"></i><span> 感想</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header"><nav id="nav"><span id="blog-info"><a href="/" title="MarcoStrand's Blog"><span class="site-name">MarcoStrand's Blog</span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/feelings/"><i class="fa-fw fa fa-paper-plane"></i><span> 感想</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">DOM学习笔记——事件基础</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2023-02-03T15:08:50.000Z" title="发表于 2023-02-03 23:08:50">2023-02-03</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-02-03T15:13:58.045Z" title="更新于 2023-02-03 23:13:58">2023-02-03</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/DOM/">-DOM</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="DOM学习笔记——事件基础"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h2 id="获取元素"><a href="#获取元素" class="headerlink" title="获取元素"></a>获取元素</h2><p>如何获取页面元素：</p>
+<ul>
+<li>根据ID获取</li>
+<li>根据标签名获取</li>
+<li>通过HTML5新增的方法获取</li>
+<li>特殊元素获取</li>
+</ul>
+<h3 id="根据ID获取"><a href="#根据ID获取" class="headerlink" title="根据ID获取"></a>根据ID获取</h3><p>getElementById()方法可以获取带有ID的对象</p>
+<p>示例：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;div id=&#x27;time&#x27;&gt;2023-1-1&lt;/div&gt;</span><br><span class="line">&lt;script&gt;</span><br><span class="line">     var timer = document.getElementTypeId(&#x27;time&#x27;);</span><br><span class="line">     console.log(typeof timer);</span><br><span class="line">     console.dir(timer);</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>因为页面从上往下加载，所以先得有标签，所以script写到标签的下面</li>
+<li>括号里需要写参数，这个参数对大小写很敏感</li>
+<li>返回的是一个元素对象</li>
+<li>console.dir();可以打印返回的元素对象，查看里面的属性和方法</li>
+</ul>
+<h3 id="根据标签名获取"><a href="#根据标签名获取" class="headerlink" title="根据标签名获取"></a>根据标签名获取</h3><p>getElementsByTagName()方法可以返回带有指定标签名对象的集合</p>
+<p>示例：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&lt;ul&gt;</span><br><span class="line">    &lt;li&gt;hello&lt;/li&gt;</span><br><span class="line">    &lt;li&gt;hello&lt;/li&gt;</span><br><span class="line">    &lt;li&gt;hello&lt;/li&gt;</span><br><span class="line">    &lt;li&gt;hello&lt;/li&gt;</span><br><span class="line">    &lt;li&gt;hello&lt;/li&gt;</span><br><span class="line">&lt;/ul&gt;</span><br><span class="line">&lt;script&gt;</span><br><span class="line">    var lis = document.getElementsByTagName(&#x27;li&#x27;); //document意为从整个文档获取</span><br><span class="line">    console.log(lis);</span><br><span class="line">    console.log((lis[0])); //返回的是获取过来元素对象的集合，以伪数组的形式存储</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>依次打印里面的元素可以使用遍历的方法</p>
+</li>
+<li><p>如果页面中只有一个li标签，返回的仍然是伪数组的形式</p>
+</li>
+<li><p>返回的是获取过来元素对象的集合，以伪数组的形式存储</p>
+</li>
+<li><p>如果页面中没有这个元素，返回的是空的伪数组</p>
+</li>
+<li><p><strong>还可以获取某个元素（父元素）内部所有指定标签名的子元素</strong></p>
+</li>
+</ul>
+<p>​        <code>element.getElementTypeName(&#39;标签名&#39;);</code></p>
+<h3 id="H5新增元素获取方式"><a href="#H5新增元素获取方式" class="headerlink" title="H5新增元素获取方式"></a>H5新增元素获取方式</h3><p><code>document.getElementByClassName();    //根据类名返回元素对象集合</code></p>
+<p><code>document.querySelector(&#39;选择器&#39;);   //根据指定选择器返回第一个元素对象，可以是类，id, 标签，类和ID需要加符号</code></p>
+<p><code>document.querySelectorAll(&#39;选择器&#39;);   //返回指定选择器的所有对象</code></p>
+<p>示例：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&lt;div class=&quot;box&quot;&gt;你好&lt;/div&gt;</span><br><span class="line">&lt;div class=&quot;box&quot;&gt;你好。&lt;/div&gt;</span><br><span class="line">&lt;div id=&quot;demo&quot;&gt;示例示例&lt;/div&gt;</span><br><span class="line">&lt;script&gt;</span><br><span class="line">    var firstBox = document.querySelector(&#x27;.box&#x27;); //选择了一个类选择器</span><br><span class="line">    console.log(firstBox);</span><br><span class="line"></span><br><span class="line">    var demo1 = document.querySelector(&#x27;#demo&#x27;);  //选择了一个ID选择器</span><br><span class="line">    console.log(demo1);</span><br><span class="line">    </span><br><span class="line">    var box = document.querySelectorAll(&#x27;.box&#x27;); //选择所有.box类</span><br><span class="line">    console.log(box);</span><br><span class="line">&lt;/script&gt;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>结果：</p>
+<img src="/2023/02/03/DOM%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E2%80%94%E2%80%94%E4%BA%8B%E4%BB%B6%E5%9F%BA%E7%A1%80/01.png" style="zoom: 80%;">
+
+<h3 id="特殊元素获取"><a href="#特殊元素获取" class="headerlink" title="特殊元素获取"></a>特殊元素获取</h3><p>获取body元素</p>
+<p><code>document.body;</code></p>
+<h4 id="案例-开关灯"><a href="#案例-开关灯" class="headerlink" title="案例:开关灯"></a>案例:开关灯</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">  &lt;head&gt;</span><br><span class="line">    &lt;style&gt;</span><br><span class="line">        .close &#123;</span><br><span class="line">            background-color: black;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        .open &#123;</span><br><span class="line">            background-color: white;</span><br><span class="line">        &#125;</span><br><span class="line">    &lt;/style&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line"></span><br><span class="line">&lt;body&gt;</span><br><span class="line"></span><br><span class="line">    &lt;button&gt;开关灯&lt;/button&gt;</span><br><span class="line"></span><br><span class="line">    &lt;script&gt;</span><br><span class="line">        var light = document.querySelector(&#x27;button&#x27;);</span><br><span class="line">        var cge = document.querySelector(&#x27;div&#x27;);</span><br><span class="line">        var body = document.body</span><br><span class="line">        var tag = 0;</span><br><span class="line">        light.onclick = function () &#123;</span><br><span class="line">            if (tag == 0) &#123;</span><br><span class="line">                body.className = &#x27;close&#x27;;</span><br><span class="line">                tag = 1;</span><br><span class="line">            &#125; else &#123;</span><br><span class="line">                body.className = &#x27;open&#x27;;</span><br><span class="line">                tag = 0;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &lt;/script&gt;</span><br></pre></td></tr></table></figure>
+
+<p>获取html元素</p>
+<p><code>document.documentElement;</code></p>
+<h2 id="事件基础"><a href="#事件基础" class="headerlink" title="事件基础"></a>事件基础</h2><h3 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h3><p>触发——响应的机制</p>
+<p>事件由三部分组成：事件源，事件类型，事件处理程序</p>
+<p>事件源：事件被触发的对象</p>
+<p>事件类型：如何触发，什么事件。比如鼠标点击，还是经过</p>
+<p>事件处理程序：通过一个函数赋值的方式完成</p>
+<h3 id="执行事件的步骤"><a href="#执行事件的步骤" class="headerlink" title="执行事件的步骤"></a>执行事件的步骤</h3><ol>
+<li>获取事件源（用户施加操作的dui’x）</li>
+<li>注册事件（用户进行的操作）</li>
+<li>添加事件处理程序（采取函数赋值的方式）（采取的反馈）</li>
+</ol>
+<p>示例：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&lt;div&gt;123&lt;/div&gt;</span><br><span class="line">&lt;script&gt;</span><br><span class="line">    var div = document.querySelector(&#x27;div&#x27;);  //获取事件源</span><br><span class="line">    //div.click  注册事件</span><br><span class="line">    div.click = function () &#123;  //添加事件处理程序</span><br><span class="line">        console.log(&#x27;我被选中了&#x27;);</span><br><span class="line">    &#125;</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+
+<h3 id="操作元素"><a href="#操作元素" class="headerlink" title="操作元素"></a>操作元素</h3><h4 id="改变元素内容"><a href="#改变元素内容" class="headerlink" title="改变元素内容"></a>改变元素内容</h4><p><code>element.innerText   //从起始位置到终止位置的内容，但它去除HTML标签，同时空格和换行也会去掉</code></p>
+<p><code>element.innerHTML  //起始位置到终止位置的全部内容，包括HTML标签，同时保留空格和换行</code></p>
+<p>示例：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">&lt;button&gt;显示当前系统时间&lt;/button&gt;</span><br><span class="line">&lt;div&gt;某个时间&lt;/div&gt;</span><br><span class="line">&lt;script&gt;</span><br><span class="line">    var btn = document.querySelector(&#x27;button&#x27;);</span><br><span class="line">    var div = document.querySelector(&#x27;div&#x27;);</span><br><span class="line">    btn.onclick = function () &#123;</span><br><span class="line">        div.innerHTML = getDate();</span><br><span class="line">    &#125;</span><br><span class="line">    function getDate() &#123;</span><br><span class="line">        var date = new Date();</span><br><span class="line">        var year = date.getFullYear();</span><br><span class="line">        var month = date.getMonth() + 1;</span><br><span class="line">        var dates = date.getDate();</span><br><span class="line">        var arr = [&#x27;星期一&#x27;, &#x27;星期一&#x27;, &#x27;星期二&#x27;, &#x27;星期三&#x27;, &#x27;星期四&#x27;, &#x27;星期五&#x27;, &#x27;星期六&#x27;];</span><br><span class="line">        var day = date.getDay();</span><br><span class="line">        return &#x27;今天是&#x27; + year + &#x27;年&#x27; + month + &#x27;月&#x27; + dates + &#x27;日&#x27; + arr[day];  //今天是2023年2月1日星期三</span><br><span class="line">    &#125;</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+
+<h4 id="常用元素属性操作"><a href="#常用元素属性操作" class="headerlink" title="常用元素属性操作"></a>常用元素属性操作</h4><p>修改元素属性，通过 <code>元素名.属性 = &#39;   &#39;;</code>来修改</p>
+<p>示例：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">&lt;button id=&quot;picture1&quot;&gt;头像1&lt;/button&gt;</span><br><span class="line"> &lt;button id=&quot;picture2&quot;&gt;头像2&lt;/button&gt;</span><br><span class="line"> &lt;img src=&quot;头像1.jpg&quot;&gt;</span><br><span class="line"> &lt;script&gt;</span><br><span class="line">     var picture1 = document.querySelector(&#x27;#picture1&#x27;);</span><br><span class="line">     var picture2 = document.querySelector(&#x27;#picture2&#x27;);</span><br><span class="line">     var img = document.querySelector(&#x27;img&#x27;);</span><br><span class="line">     picture1.onclick = function () &#123;</span><br><span class="line">         img.src = &#x27;头像2.jpg&#x27;;</span><br><span class="line">         img.title = &#x27;头像2&#x27;;</span><br><span class="line">     &#125;</span><br><span class="line">     picture2.onclick = function () &#123;</span><br><span class="line">         img.src = &#x27;头像1.jpg&#x27;;</span><br><span class="line">         img.title = &#x27;头像1&#x27;;</span><br><span class="line">     &#125;</span><br><span class="line"></span><br><span class="line"> &lt;/script&gt;</span><br></pre></td></tr></table></figure>
+
+
+
+<h5 id="案例：分时问候"><a href="#案例：分时问候" class="headerlink" title="案例：分时问候"></a>案例：分时问候</h5><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">&lt;img src=&quot;images/上午好.png&quot;&gt;</span><br><span class="line">&lt;div&gt;上午好&lt;/div&gt;</span><br><span class="line">&lt;script&gt;</span><br><span class="line">    var img = document.querySelector(&#x27;img&#x27;);</span><br><span class="line">    var div = document.querySelector(&#x27;div&#x27;);</span><br><span class="line">    var date = new Date();</span><br><span class="line">    var h = date.getHours();</span><br><span class="line">    if (h &lt; 12) &#123;</span><br><span class="line">        img.src = &#x27;images/上午好.png&#x27;;</span><br><span class="line">        div.innerHTML = &#x27;上午好&#x27;;</span><br><span class="line">    &#125;</span><br><span class="line">    else if (h &lt; 18) &#123;</span><br><span class="line">        img.src = &#x27;images/下午好.png&#x27;;</span><br><span class="line">        div.innerHTML = &#x27;下午好&#x27;;</span><br><span class="line">    &#125; else &#123;</span><br><span class="line">        img.src = &#x27;images/晚上好.png&#x27;;</span><br><span class="line">        div.innerHTML = &#x27;晚上好&#x27;;</span><br><span class="line">    &#125;</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="表单元素属性操作"><a href="#表单元素属性操作" class="headerlink" title="表单元素属性操作"></a>表单元素属性操作</h4><p>利用DOM属性可以操作如下表单元素的属性：</p>
+<p>type,  value,  checked,  selected,  disabled</p>
+<p>示例：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&lt;button&gt;按钮&lt;/button&gt;</span><br><span class="line">   &lt;input type=&quot;text&quot; value=&quot;输入内容&quot;&gt;</span><br><span class="line">   &lt;script&gt;</span><br><span class="line">       var btn = document.querySelector(&#x27;button&#x27;);</span><br><span class="line">       var input = document.querySelector(&#x27;input&#x27;);</span><br><span class="line">       btn.onclick = function () &#123;</span><br><span class="line">           input.value = &#x27;被点击了&#x27;;</span><br><span class="line">           //想要某个表单被禁用，不能再点击</span><br><span class="line">           btn.disabled = true;</span><br><span class="line">           //this指向的是事件函数的调用者btn</span><br><span class="line">           this.disabled = true;</span><br><span class="line">       &#125;</span><br><span class="line">   &lt;/script&gt;</span><br></pre></td></tr></table></figure>
+
+
+
+<h5 id="案例：京东密码显示"><a href="#案例：京东密码显示" class="headerlink" title="案例：京东密码显示"></a>案例：京东密码显示</h5><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">&lt;div class=&quot;box&quot;&gt;</span><br><span class="line">    &lt;label for=&quot;&quot;&gt;</span><br><span class="line">        &lt;img src=&quot;images/close.png&quot; id=&quot;eye&quot;&gt;</span><br><span class="line">    &lt;/label&gt;</span><br><span class="line">    &lt;input type=&quot;password&quot; id=&quot;pwd&quot;&gt;</span><br><span class="line">&lt;/div&gt;</span><br><span class="line">&lt;script&gt;</span><br><span class="line">    var eye = document.getElementById(&#x27;eye&#x27;);</span><br><span class="line">    var pwd = document.getElementById(&#x27;pwd&#x27;);</span><br><span class="line">    //绑定事件 处理程序</span><br><span class="line">    var flag = 0;</span><br><span class="line">    eye.onclick = function () &#123;</span><br><span class="line">        if (flag == 0) &#123;</span><br><span class="line">            pwd.type = &#x27;text&#x27;;</span><br><span class="line">            eye.src = &#x27;images/open.png&#x27;;</span><br><span class="line">            flag = 1;</span><br><span class="line">        &#125; else &#123;</span><br><span class="line">            pwd.type = &#x27;password&#x27;;</span><br><span class="line">            eye.src = &#x27;images/close.png&#x27;;</span><br><span class="line">            flag = 0;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="样式属性操作（修改样式比较少）"><a href="#样式属性操作（修改样式比较少）" class="headerlink" title="样式属性操作（修改样式比较少）"></a>样式属性操作（修改样式比较少）</h4><p>里面的属性采取驼峰命名法。且修改style样式操作，产生的是行内样式，权重高</p>
+<p><code>element.style   行内样式操作</code></p>
+<p><code>element.className 类名样式操作</code></p>
+<h4 id="使用className修改样式属性（修改样式比较多）"><a href="#使用className修改样式属性（修改样式比较多）" class="headerlink" title="使用className修改样式属性（修改样式比较多）"></a>使用className修改样式属性（修改样式比较多）</h4><p>将改变后的样式写在css里，然后在函数内使用<code>this.className = &#39;新样式类名&#39;;</code>调用</p>
+<img src="/2023/02/03/DOM%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E2%80%94%E2%80%94%E4%BA%8B%E4%BB%B6%E5%9F%BA%E7%A1%80/image-20230203203527473.png" style="zoom: 50%;">
+
+<ul>
+<li>为了方式覆盖原来的类名，可以采用多类名选择器 <code>this.className = &#39;原类名 新样式类名&#39;;</code></li>
+</ul>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="http://localhost:4000">Liu Hanzhang</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://localhost:4000/2023/02/03/DOM%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E2%80%94%E2%80%94%E4%BA%8B%E4%BB%B6%E5%9F%BA%E7%A1%80/">http://localhost:4000/2023/02/03/DOM%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E2%80%94%E2%80%94%E4%BA%8B%E4%BB%B6%E5%9F%BA%E7%A1%80/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://localhost:4000" target="_blank">MarcoStrand's Blog</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/DOM/">-DOM</a></div><div class="post_share"><div class="social-share" data-image="https://s3.bmp.ovh/imgs/2023/02/01/4d1d3d69f2327ffc.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="next-post pull-full"><a href="/2023/02/02/JavaScript%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E2%80%94%E2%80%94%E5%86%85%E7%BD%AE%E5%AF%B9%E8%B1%A1/" title="JavaScript学习笔记——内置对象"><div class="cover" style="background: var(--default-bg-color)"></div><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">JavaScript学习笔记——内置对象</div></div></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://s3.bmp.ovh/imgs/2023/02/01/4d1d3d69f2327ffc.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">Liu Hanzhang</div><div class="author-info__description"></div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">7</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">7</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">2</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/MarcoStrand/MarcoStrand.github.io"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/MarcoStrand/MarcoStrand.github.io" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="mailto:1160691894@qq.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a></div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%8E%B7%E5%8F%96%E5%85%83%E7%B4%A0"><span class="toc-number">1.</span> <span class="toc-text">获取元素</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A0%B9%E6%8D%AEID%E8%8E%B7%E5%8F%96"><span class="toc-number">1.1.</span> <span class="toc-text">根据ID获取</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A0%B9%E6%8D%AE%E6%A0%87%E7%AD%BE%E5%90%8D%E8%8E%B7%E5%8F%96"><span class="toc-number">1.2.</span> <span class="toc-text">根据标签名获取</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#H5%E6%96%B0%E5%A2%9E%E5%85%83%E7%B4%A0%E8%8E%B7%E5%8F%96%E6%96%B9%E5%BC%8F"><span class="toc-number">1.3.</span> <span class="toc-text">H5新增元素获取方式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%89%B9%E6%AE%8A%E5%85%83%E7%B4%A0%E8%8E%B7%E5%8F%96"><span class="toc-number">1.4.</span> <span class="toc-text">特殊元素获取</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%A1%88%E4%BE%8B-%E5%BC%80%E5%85%B3%E7%81%AF"><span class="toc-number">1.4.1.</span> <span class="toc-text">案例:开关灯</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8B%E4%BB%B6%E5%9F%BA%E7%A1%80"><span class="toc-number">2.</span> <span class="toc-text">事件基础</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A6%82%E5%BF%B5"><span class="toc-number">2.1.</span> <span class="toc-text">概念</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%89%A7%E8%A1%8C%E4%BA%8B%E4%BB%B6%E7%9A%84%E6%AD%A5%E9%AA%A4"><span class="toc-number">2.2.</span> <span class="toc-text">执行事件的步骤</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%93%8D%E4%BD%9C%E5%85%83%E7%B4%A0"><span class="toc-number">2.3.</span> <span class="toc-text">操作元素</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%94%B9%E5%8F%98%E5%85%83%E7%B4%A0%E5%86%85%E5%AE%B9"><span class="toc-number">2.3.1.</span> <span class="toc-text">改变元素内容</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%B8%B8%E7%94%A8%E5%85%83%E7%B4%A0%E5%B1%9E%E6%80%A7%E6%93%8D%E4%BD%9C"><span class="toc-number">2.3.2.</span> <span class="toc-text">常用元素属性操作</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E6%A1%88%E4%BE%8B%EF%BC%9A%E5%88%86%E6%97%B6%E9%97%AE%E5%80%99"><span class="toc-number">2.3.2.1.</span> <span class="toc-text">案例：分时问候</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%A1%A8%E5%8D%95%E5%85%83%E7%B4%A0%E5%B1%9E%E6%80%A7%E6%93%8D%E4%BD%9C"><span class="toc-number">2.3.3.</span> <span class="toc-text">表单元素属性操作</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E6%A1%88%E4%BE%8B%EF%BC%9A%E4%BA%AC%E4%B8%9C%E5%AF%86%E7%A0%81%E6%98%BE%E7%A4%BA"><span class="toc-number">2.3.3.1.</span> <span class="toc-text">案例：京东密码显示</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%A0%B7%E5%BC%8F%E5%B1%9E%E6%80%A7%E6%93%8D%E4%BD%9C%EF%BC%88%E4%BF%AE%E6%94%B9%E6%A0%B7%E5%BC%8F%E6%AF%94%E8%BE%83%E5%B0%91%EF%BC%89"><span class="toc-number">2.3.4.</span> <span class="toc-text">样式属性操作（修改样式比较少）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8className%E4%BF%AE%E6%94%B9%E6%A0%B7%E5%BC%8F%E5%B1%9E%E6%80%A7%EF%BC%88%E4%BF%AE%E6%94%B9%E6%A0%B7%E5%BC%8F%E6%AF%94%E8%BE%83%E5%A4%9A%EF%BC%89"><span class="toc-number">2.3.5.</span> <span class="toc-text">使用className修改样式属性（修改样式比较多）</span></a></li></ol></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/02/03/DOM%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E2%80%94%E2%80%94%E4%BA%8B%E4%BB%B6%E5%9F%BA%E7%A1%80/" title="DOM学习笔记——事件基础">DOM学习笔记——事件基础</a><time datetime="2023-02-03T15:08:50.000Z" title="发表于 2023-02-03 23:08:50">2023-02-03</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/02/02/JavaScript%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E2%80%94%E2%80%94%E5%86%85%E7%BD%AE%E5%AF%B9%E8%B1%A1/" title="JavaScript学习笔记——内置对象">JavaScript学习笔记——内置对象</a><time datetime="2023-02-02T14:22:30.000Z" title="发表于 2023-02-02 22:22:30">2023-02-02</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/02/01/%E9%94%99%E8%AF%AF%E8%AE%B0%E5%BD%95%E2%80%94%E2%80%94%E5%87%BD%E6%95%B0%E7%9A%84%E8%B0%83%E7%94%A8%E4%B8%8E%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0%E8%B0%83%E7%94%A8%E7%9A%84%E5%8C%BA%E5%88%AB/" title="错误记录——函数的调用与构造函数调用的区别">错误记录——函数的调用与构造函数调用的区别</a><time datetime="2023-02-01T08:08:56.000Z" title="发表于 2023-02-01 16:08:56">2023-02-01</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/02/01/JavaScript%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E2%80%94%E2%80%94%E4%BD%9C%E7%94%A8%E5%9F%9F%E4%B8%8E%E9%A2%84%E8%A7%A3%E6%9E%90/" title="JavaScript学习笔记——作用域与预解析">JavaScript学习笔记——作用域与预解析</a><time datetime="2023-01-31T16:01:50.000Z" title="发表于 2023-02-01 00:01:50">2023-02-01</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/01/31/JavaScript%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E2%80%94%E2%80%94%E5%AF%B9%E8%B1%A1/" title="JavaScript学习笔记——对象">JavaScript学习笔记——对象</a><time datetime="2023-01-31T15:56:46.000Z" title="发表于 2023-01-31 23:56:46">2023-01-31</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2023 By Liu Hanzhang</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.min.js"></script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
