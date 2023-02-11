@@ -2,6 +2,15 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://localhost:4000/2023/02/11/JavaScript%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E2%80%94%E2%80%94DOM%E4%BA%8B%E4%BB%B6%E9%AB%98%E7%BA%A7/</loc>
+    
+    <lastmod>2023-02-11</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>http://localhost:4000/2023/02/11/JavaScript%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E2%80%94%E2%80%94PC%E7%AB%AF%E7%BD%91%E9%A1%B5%E7%89%B9%E6%95%88/</loc>
     
     <lastmod>2023-02-11</lastmod>
@@ -12,15 +21,6 @@
   
   <url>
     <loc>http://localhost:4000/2023/02/11/JavaScript%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E2%80%94%E2%80%94BOM/</loc>
-    
-    <lastmod>2023-02-11</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>http://localhost:4000/2023/02/11/JavaScript%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E2%80%94%E2%80%94DOM%E4%BA%8B%E4%BB%B6%E9%AB%98%E7%BA%A7/</loc>
     
     <lastmod>2023-02-11</lastmod>
     
@@ -255,14 +255,14 @@
   </url>
   
   <url>
-    <loc>http://localhost:4000/categories/DOM/JavaScirpt/</loc>
+    <loc>http://localhost:4000/categories/BOM/</loc>
     <lastmod>2023-02-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>http://localhost:4000/categories/BOM/</loc>
+    <loc>http://localhost:4000/categories/JavaScirpt/</loc>
     <lastmod>2023-02-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
