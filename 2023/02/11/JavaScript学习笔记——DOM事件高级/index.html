@@ -1,0 +1,278 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"><title>JavaScript学习笔记——DOM事件高级 | MarcoStrand's Blog</title><meta name="author" content="Liu Hanzhang"><meta name="copyright" content="Liu Hanzhang"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="事件高级1. 注册事件（绑定事件）传统注册方式和方法监听注册方式 传统注册方式   方法监听注册方式   addEventListener 事件监听方式eventTarget.addEventListener(type, Listener[, useCapture])   2. 删除事件（解绑事件）传统方式删除事件 evetTarget.onclick &#x3D; null; 方法监听注册方式删除事件 e">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JavaScript学习笔记——DOM事件高级">
+<meta property="og:url" content="http://localhost:4000/2023/02/11/JavaScript%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E2%80%94%E2%80%94DOM%E4%BA%8B%E4%BB%B6%E9%AB%98%E7%BA%A7/index.html">
+<meta property="og:site_name" content="MarcoStrand&#39;s Blog">
+<meta property="og:description" content="事件高级1. 注册事件（绑定事件）传统注册方式和方法监听注册方式 传统注册方式   方法监听注册方式   addEventListener 事件监听方式eventTarget.addEventListener(type, Listener[, useCapture])   2. 删除事件（解绑事件）传统方式删除事件 evetTarget.onclick &#x3D; null; 方法监听注册方式删除事件 e">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://s3.bmp.ovh/imgs/2023/02/01/4d1d3d69f2327ffc.jpg">
+<meta property="article:published_time" content="2023-02-11T13:20:03.000Z">
+<meta property="article:modified_time" content="2023-02-11T13:24:54.841Z">
+<meta property="article:author" content="Liu Hanzhang">
+<meta property="article:tag" content="JavaScript学习笔记">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://s3.bmp.ovh/imgs/2023/02/01/4d1d3d69f2327ffc.jpg"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://localhost:4000/2023/02/11/JavaScript%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E2%80%94%E2%80%94DOM%E4%BA%8B%E4%BB%B6%E9%AB%98%E7%BA%A7/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  }
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'JavaScript学习笔记——DOM事件高级',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2023-02-11 21:24:54'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+    win.getCSS = url => new Promise((resolve, reject) => {
+      const link = document.createElement('link')
+      link.rel = 'stylesheet'
+      link.href = url
+      link.onload = () => resolve()
+      link.onerror = () => reject()
+      document.head.appendChild(link)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/js-heo@1.0.11/bb/showbb_in_index.css"><meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="MarcoStrand's Blog" type="application/atom+xml">
+</head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://s3.bmp.ovh/imgs/2023/02/01/4d1d3d69f2327ffc.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">12</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">10</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">6</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/feelings/"><i class="fa-fw fa fa-paper-plane"></i><span> 感想</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header"><nav id="nav"><span id="blog-info"><a href="/" title="MarcoStrand's Blog"><span class="site-name">MarcoStrand's Blog</span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/feelings/"><i class="fa-fw fa fa-paper-plane"></i><span> 感想</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">JavaScript学习笔记——DOM事件高级</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2023-02-11T13:20:03.000Z" title="发表于 2023-02-11 21:20:03">2023-02-11</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-02-11T13:24:54.841Z" title="更新于 2023-02-11 21:24:54">2023-02-11</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/DOM/">DOM</a><i class="fas fa-angle-right post-meta-separator"></i><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/DOM/JavaScirpt/">JavaScirpt</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="JavaScript学习笔记——DOM事件高级"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h2 id="事件高级"><a href="#事件高级" class="headerlink" title="事件高级"></a>事件高级</h2><h3 id="1-注册事件（绑定事件）"><a href="#1-注册事件（绑定事件）" class="headerlink" title="1. 注册事件（绑定事件）"></a>1. 注册事件（绑定事件）</h3><p>传统注册方式和方法监听注册方式</p>
+<p>传统注册方式</p>
+<img src="/2023/02/11/JavaScript%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E2%80%94%E2%80%94DOM%E4%BA%8B%E4%BB%B6%E9%AB%98%E7%BA%A7/image-20230206104219280.png" style="zoom:50%;">
+
+<p>方法监听注册方式</p>
+<img src="/2023/02/11/JavaScript%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E2%80%94%E2%80%94DOM%E4%BA%8B%E4%BB%B6%E9%AB%98%E7%BA%A7/image-20230206104357965.png" style="zoom:50%;">
+
+<h4 id="addEventListener-事件监听方式"><a href="#addEventListener-事件监听方式" class="headerlink" title="addEventListener 事件监听方式"></a>addEventListener 事件监听方式</h4><p><code>eventTarget.addEventListener(type, Listener[, useCapture])</code></p>
+<img src="/2023/02/11/JavaScript%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E2%80%94%E2%80%94DOM%E4%BA%8B%E4%BB%B6%E9%AB%98%E7%BA%A7/image-20230206104615410.png" style="zoom:50%;">
+
+<h3 id="2-删除事件（解绑事件）"><a href="#2-删除事件（解绑事件）" class="headerlink" title="2. 删除事件（解绑事件）"></a>2. 删除事件（解绑事件）</h3><p>传统方式删除事件</p>
+<p><code>evetTarget.onclick = null;</code></p>
+<p>方法监听注册方式删除事件</p>
+<p><code>eventTarget.removeEventListener(type,listener[, useCapture]);</code></p>
+<p><code>eventTarget.detachEvent(eventNameWithOn,callback);</code></p>
+<p>示例：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">&lt;div&gt;1&lt;/div&gt;</span><br><span class="line">&lt;div&gt;2&lt;/div&gt;</span><br><span class="line">&lt;div&gt;3&lt;/div&gt;</span><br><span class="line">       //传统删除方法</span><br><span class="line">       var divs = document.querySelectorAll(&#x27;div&#x27;);</span><br><span class="line">       divs[0].onclick = function () &#123;</span><br><span class="line">           alert(&#x27;123&#x27;);</span><br><span class="line">           divs[0].onclick = null; //删除事件</span><br><span class="line">       &#125;</span><br><span class="line">       //方法监听注册方式</span><br><span class="line">       divs[1].addEventListener(&#x27;click&#x27;, fn)  //使用方法监听注册方式，不可以使用匿名函数，需要把响应器写在外面，而且不需要调用，直接把函数名写在里面</span><br><span class="line">       function fn() &#123;</span><br><span class="line">           alert(&#x27;456&#x27;);</span><br><span class="line">           divs[1].removeEventListener(&#x27;click&#x27;, fn);</span><br><span class="line">       &#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="3-DOM事件流"><a href="#3-DOM事件流" class="headerlink" title="3. DOM事件流"></a>3. DOM事件流</h3><img src="/2023/02/11/JavaScript%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E2%80%94%E2%80%94DOM%E4%BA%8B%E4%BB%B6%E9%AB%98%E7%BA%A7/image-20230206114004135.png" style="zoom:50%;">
+
+<img src="/2023/02/11/JavaScript%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E2%80%94%E2%80%94DOM%E4%BA%8B%E4%BB%B6%E9%AB%98%E7%BA%A7/image-20230206114159900.png" style="zoom:50%;">
+
+<p>注意：</p>
+<ul>
+<li><p>JS代码只能执行捕获或者冒泡其中一个阶段</p>
+</li>
+<li><p>onclick和attachEvent只能得到冒泡阶段</p>
+</li>
+<li><p>如果<code>eventTarget.addEventListener(type, Listener[, useCapture])</code>的第三个参数是 true，则处于捕获阶段</p>
+</li>
+</ul>
+<p>​        如果<code>eventTarget.addEventListener(type, Listener[, useCapture])</code>的第三个参数是false，则处于冒泡阶段</p>
+<ul>
+<li>很少使用事件捕获</li>
+<li>onblur,onfocus,onmouseenter,onmouseleave事件没有冒泡</li>
+</ul>
+<h3 id="4-事件对象"><a href="#4-事件对象" class="headerlink" title="4.  事件对象"></a>4.  事件对象</h3><ol>
+<li><p>event事件对象写在侦听函数的括号里，当形参看</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">var div = document.querySelector(&#x27;div&#x27;)</span><br><span class="line">div.onclick=function(event)&#123;</span><br><span class="line">console.log(event);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>事件对象只有有了事件才会存在，它是系统给我们自动创建的，不需要我们传递参数</strong></p>
+</li>
+<li><p>事件对象是我们事件的一系列相关数据的集合，跟事件相关的，比如鼠标点击里面包含了鼠标的相关信息，比如坐标等</p>
+</li>
+<li><p>这个事件对象我们可以自己命名，比如evt e   </p>
+</li>
+<li><p>兼容性：添加 e &#x3D; e || window.event</p>
+</li>
+<li><p><strong>注意事件对象与事件的区别</strong>：当事件的响应函数被触发时，会产生一个事件对象<code>event</code>。浏览器每次都会将这个事件<code>event</code>作为实参传进之前的响应函数。事件是我们进行的操作，比如点击鼠标，按下键盘等。</p>
+</li>
+</ol>
+<h4 id="常见的属性和方法："><a href="#常见的属性和方法：" class="headerlink" title="常见的属性和方法："></a>常见的属性和方法：</h4><ol>
+<li><p>e.target和this的区别：</p>
+<p>e.target返回点击的元素，如果点击了ul里面的li，则返回li</p>
+<p>this返回绑定事件的对象（元素），如果点击了ul里面的li，则返回ul</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&lt;ul&gt;</span><br><span class="line">    &lt;li&gt;123&lt;/li&gt;</span><br><span class="line">&lt;/ul&gt;</span><br><span class="line">&lt;div&gt;&lt;/div&gt;</span><br><span class="line">&lt;script&gt;</span><br><span class="line">    var ul = document.querySelector(&#x27;ul&#x27;);</span><br><span class="line">    ul.addEventListener(&#x27;click&#x27;, function (e) &#123;</span><br><span class="line">        console.log(e.target);  </span><br><span class="line">    &#125;)</span><br><span class="line">    var div = document.querySelector(&#x27;div&#x27;);</span><br><span class="line">    div.addEventListener(&#x27;click&#x27;, function (e) &#123;</span><br><span class="line">        console.log(this);</span><br><span class="line">    &#125;)</span><br></pre></td></tr></table></figure></li>
+</ol>
+<ul>
+<li>跟this有一个相似的属性，currentTarget</li>
+</ul>
+<ol start="2">
+<li><p>阻止默认行为的三种方法</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">&lt;div&gt;123&lt;/div&gt;</span><br><span class="line">   &lt;a href=&quot;http://www.baidu.com&quot;&gt;百度&lt;/a&gt;</span><br><span class="line">   &lt;form action=&quot;http://www.baidu.com&quot;&gt;</span><br><span class="line">       &lt;input type=&quot;submit&quot; value=&quot;提交&quot; name=&quot;sub&quot;&gt;</span><br><span class="line">   &lt;/form&gt;</span><br><span class="line">   &lt;script&gt;</span><br><span class="line">       var div = document.querySelector(&#x27;div&#x27;);</span><br><span class="line">       div.addEventListener(&#x27;click&#x27;, fn);</span><br><span class="line">       function fn(e) &#123;</span><br><span class="line">           console.log(e.type);</span><br><span class="line">       &#125;</span><br><span class="line">   </span><br><span class="line">       //阻止默认行为 让链接不跳转，或者让提交按钮不提交</span><br><span class="line">       var a = document.querySelector(&#x27;a&#x27;);</span><br><span class="line">       a.addEventListener(&#x27;click&#x27;, function (e) &#123;</span><br><span class="line">           e.preventDefault(); //DOM标准写法，适用于普通浏览器</span><br><span class="line">           e.returnValue;  //适用于低版本浏览器</span><br><span class="line">           return false;  //也能阻止默认行为，特点就是return后面的代码不执行了，而且只限于传统的注册方式</span><br><span class="line">       &#125;)</span><br><span class="line">   &lt;/script&gt;</span><br></pre></td></tr></table></figure></li>
+</ol>
+<h3 id="5-阻止事件冒泡"><a href="#5-阻止事件冒泡" class="headerlink" title="5.  阻止事件冒泡"></a>5.  阻止事件冒泡</h3><h4 id="阻止事件冒泡的两种方式"><a href="#阻止事件冒泡的两种方式" class="headerlink" title="阻止事件冒泡的两种方式"></a>阻止事件冒泡的两种方式</h4><p>标准写法：利用事件对象里面的stopPropagation()方法</p>
+<p>示例：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">&lt;div class=&quot;demo1&quot;&gt;</span><br><span class="line">    &lt;div class=&quot;demo2&quot;&gt;&lt;/div&gt;</span><br><span class="line">&lt;/div&gt;</span><br><span class="line">&lt;script&gt;</span><br><span class="line">    var son = document.querySelector(&#x27;.demo2&#x27;);</span><br><span class="line">    son.addEventListener(&#x27;click&#x27;, function (e) &#123;</span><br><span class="line">        alert(&#x27;son&#x27;);</span><br><span class="line">        e.stopPropagation(); //stop停止，不再弹出&#x27;father&#x27;</span><br><span class="line">        e.cancelBubble = true;//低版本使用</span><br><span class="line">    &#125;, false)</span><br><span class="line">    var father = document.querySelector(&#x27;.demo1&#x27;);</span><br><span class="line">    father.addEventListener(&#x27;click&#x27;, function (e) &#123;</span><br><span class="line">        alert(&#x27;father&#x27;);</span><br><span class="line"></span><br><span class="line">    &#125;, false);</span><br><span class="line"></span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+
+<h3 id="6-事件委托"><a href="#6-事件委托" class="headerlink" title="6.  事件委托"></a>6.  事件委托</h3><p>事件委托：也称为事件代理</p>
+<p>事件委托的原理：</p>
+<p>不是给每个子节点单独设置事件监听器，而是事件监听器设置在其父节点上，然后利用冒泡原理，当对子节点执行操作，会触发父节点的事件</p>
+<p>例如：给ul注册事件，然后利用事件对象的target来找到当前点击的li，因为点击li,事件会冒泡到ul上，ul有注册事件，就会触发事件监听器</p>
+<p>事件委托的作用：</p>
+<p>只操作了一次DOM</p>
+<p>示例:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&lt;ul&gt;</span><br><span class="line">        &lt;li&gt;halo&lt;/li&gt;</span><br><span class="line">        &lt;li&gt;halo&lt;/li&gt;</span><br><span class="line">        &lt;li&gt;halo&lt;/li&gt;</span><br><span class="line">        &lt;li&gt;halo&lt;/li&gt;</span><br><span class="line">        &lt;li&gt;halo&lt;/li&gt;</span><br><span class="line">    &lt;/ul&gt;</span><br><span class="line">    &lt;script&gt;</span><br><span class="line">        var ul = document.querySelector(&#x27;ul&#x27;);</span><br><span class="line">        ul.addEventListener(&#x27;click&#x27;, function (e) &#123;</span><br><span class="line">            e.target.style.backgroundColor = &#x27;orange&#x27;; //获取父元素，当点击父元素，背景颜色变化，冒泡影响子元素</span><br><span class="line">        &#125;)</span><br><span class="line">    &lt;/script&gt;</span><br></pre></td></tr></table></figure>
+
+<h3 id="7-常用的鼠标事件"><a href="#7-常用的鼠标事件" class="headerlink" title="7.  常用的鼠标事件"></a>7.  常用的鼠标事件</h3><img src="/2023/02/11/JavaScript%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E2%80%94%E2%80%94DOM%E4%BA%8B%E4%BB%B6%E9%AB%98%E7%BA%A7/image-20230206161249732.png" style="zoom:50%;">
+
+<ol>
+<li><p>禁止鼠标右键菜单</p>
+<p>contextmenu主要控制应该何时显示上下文菜单，主要用于程序员取消默认的上下文菜单</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line">        document.addEventListener(&#x27;contextmenu&#x27;, function (e) &#123;</span><br><span class="line">            e.preventDefault();</span><br><span class="line">        &#125;)</span><br><span class="line">    &lt;/script&gt;</span><br></pre></td></tr></table></figure></li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"></span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>禁止鼠标选中</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">document.addEventListener(&#x27;selectstart&#x27;, function (e) &#123;</span><br><span class="line">            e.preventDefault();</span><br><span class="line">        &#125;)</span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li>鼠标事件对象</li>
+</ol>
+<img src="/2023/02/11/JavaScript%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E2%80%94%E2%80%94DOM%E4%BA%8B%E4%BB%B6%E9%AB%98%E7%BA%A7/image-20230206165803079.png" style="zoom:50%;">
+
+<p>注意：</p>
+<ul>
+<li>可视区指的是相对于当前导航栏和窗口边缘，即使有滚动条，仍然以导航栏和窗口边缘为准</li>
+<li>页面文档指的是整个页面</li>
+</ul>
+<h3 id="8-常用的键盘事件"><a href="#8-常用的键盘事件" class="headerlink" title="8.  常用的键盘事件"></a>8.  常用的键盘事件</h3><img src="/2023/02/11/JavaScript%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E2%80%94%E2%80%94DOM%E4%BA%8B%E4%BB%B6%E9%AB%98%E7%BA%A7/image-20230206193223796.png" style="zoom:50%;">
+
+<p>注意：</p>
+<ul>
+<li><p>如果使用addEventListener不需要加on</p>
+</li>
+<li><p>执行顺序：keydown-&gt;keypress-&gt;keyup</p>
+</li>
+</ul>
+<p><strong>键盘事件对象</strong></p>
+<ol>
+<li>keycode属性可以得到相应键的ASCⅡ码值。keyup和keydown不区分大小写，而keypress区分大小写</li>
+<li>实际开发中，更多实用keydown和keyup,它能识别所有的键</li>
+</ol>
+<h4 id="——实例京东按键输入"><a href="#——实例京东按键输入" class="headerlink" title="——实例京东按键输入"></a>——实例京东按键输入</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&lt;input type=&quot;text&quot;&gt;</span><br><span class="line">&lt;script&gt;</span><br><span class="line">    var search = document.querySelector(&#x27;input&#x27;);</span><br><span class="line">    document.addEventListener(&#x27;keyup&#x27;, function (e) &#123; //使用keyup，按下s键就不会把S输入到文本框</span><br><span class="line">        // console.log(e.keyCode);</span><br><span class="line">        if (e.keyCode == 83) &#123;</span><br><span class="line">            search.focus();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;)</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="http://localhost:4000">Liu Hanzhang</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://localhost:4000/2023/02/11/JavaScript%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E2%80%94%E2%80%94DOM%E4%BA%8B%E4%BB%B6%E9%AB%98%E7%BA%A7/">http://localhost:4000/2023/02/11/JavaScript%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E2%80%94%E2%80%94DOM%E4%BA%8B%E4%BB%B6%E9%AB%98%E7%BA%A7/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://localhost:4000" target="_blank">MarcoStrand's Blog</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/JavaScript%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">JavaScript学习笔记</a></div><div class="post_share"><div class="social-share" data-image="https://s3.bmp.ovh/imgs/2023/02/01/4d1d3d69f2327ffc.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2023/02/11/JavaScript%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E2%80%94%E2%80%94BOM/" title="JavaScript学习笔记——BOM"><div class="cover" style="background: var(--default-bg-color)"></div><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">JavaScript学习笔记——BOM</div></div></a></div><div class="next-post pull-right"><a href="/2023/02/08/%E9%94%99%E8%AF%AF%E8%AE%B0%E5%BD%95%E2%80%94%E2%80%94%E4%BA%AC%E4%B8%9C%E6%94%BE%E5%A4%A7%E9%95%9C/" title="错误记录——京东放大镜"><div class="cover" style="background: var(--default-bg-color)"></div><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">错误记录——京东放大镜</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/2023/02/08/%E9%94%99%E8%AF%AF%E8%AE%B0%E5%BD%95%E2%80%94%E2%80%94%E4%BA%AC%E4%B8%9C%E6%94%BE%E5%A4%A7%E9%95%9C/" title="错误记录——京东放大镜"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-02-08</div><div class="title">错误记录——京东放大镜</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://s3.bmp.ovh/imgs/2023/02/01/4d1d3d69f2327ffc.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">Liu Hanzhang</div><div class="author-info__description"></div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">12</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">10</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">6</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/MarcoStrand/MarcoStrand.github.io"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/MarcoStrand/MarcoStrand.github.io" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="mailto:1160691894@qq.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a></div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8B%E4%BB%B6%E9%AB%98%E7%BA%A7"><span class="toc-number">1.</span> <span class="toc-text">事件高级</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E6%B3%A8%E5%86%8C%E4%BA%8B%E4%BB%B6%EF%BC%88%E7%BB%91%E5%AE%9A%E4%BA%8B%E4%BB%B6%EF%BC%89"><span class="toc-number">1.1.</span> <span class="toc-text">1. 注册事件（绑定事件）</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#addEventListener-%E4%BA%8B%E4%BB%B6%E7%9B%91%E5%90%AC%E6%96%B9%E5%BC%8F"><span class="toc-number">1.1.1.</span> <span class="toc-text">addEventListener 事件监听方式</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E5%88%A0%E9%99%A4%E4%BA%8B%E4%BB%B6%EF%BC%88%E8%A7%A3%E7%BB%91%E4%BA%8B%E4%BB%B6%EF%BC%89"><span class="toc-number">1.2.</span> <span class="toc-text">2. 删除事件（解绑事件）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-DOM%E4%BA%8B%E4%BB%B6%E6%B5%81"><span class="toc-number">1.3.</span> <span class="toc-text">3. DOM事件流</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-%E4%BA%8B%E4%BB%B6%E5%AF%B9%E8%B1%A1"><span class="toc-number">1.4.</span> <span class="toc-text">4.  事件对象</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%B8%B8%E8%A7%81%E7%9A%84%E5%B1%9E%E6%80%A7%E5%92%8C%E6%96%B9%E6%B3%95%EF%BC%9A"><span class="toc-number">1.4.1.</span> <span class="toc-text">常见的属性和方法：</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-%E9%98%BB%E6%AD%A2%E4%BA%8B%E4%BB%B6%E5%86%92%E6%B3%A1"><span class="toc-number">1.5.</span> <span class="toc-text">5.  阻止事件冒泡</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%98%BB%E6%AD%A2%E4%BA%8B%E4%BB%B6%E5%86%92%E6%B3%A1%E7%9A%84%E4%B8%A4%E7%A7%8D%E6%96%B9%E5%BC%8F"><span class="toc-number">1.5.1.</span> <span class="toc-text">阻止事件冒泡的两种方式</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-%E4%BA%8B%E4%BB%B6%E5%A7%94%E6%89%98"><span class="toc-number">1.6.</span> <span class="toc-text">6.  事件委托</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-%E5%B8%B8%E7%94%A8%E7%9A%84%E9%BC%A0%E6%A0%87%E4%BA%8B%E4%BB%B6"><span class="toc-number">1.7.</span> <span class="toc-text">7.  常用的鼠标事件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#8-%E5%B8%B8%E7%94%A8%E7%9A%84%E9%94%AE%E7%9B%98%E4%BA%8B%E4%BB%B6"><span class="toc-number">1.8.</span> <span class="toc-text">8.  常用的键盘事件</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E2%80%94%E2%80%94%E5%AE%9E%E4%BE%8B%E4%BA%AC%E4%B8%9C%E6%8C%89%E9%94%AE%E8%BE%93%E5%85%A5"><span class="toc-number">1.8.1.</span> <span class="toc-text">——实例京东按键输入</span></a></li></ol></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/02/11/JavaScript%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E2%80%94%E2%80%94PC%E7%AB%AF%E7%BD%91%E9%A1%B5%E7%89%B9%E6%95%88/" title="JavaScript学习笔记——PC端网页特效">JavaScript学习笔记——PC端网页特效</a><time datetime="2023-02-11T13:30:00.000Z" title="发表于 2023-02-11 21:30:00">2023-02-11</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/02/11/JavaScript%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E2%80%94%E2%80%94BOM/" title="JavaScript学习笔记——BOM">JavaScript学习笔记——BOM</a><time datetime="2023-02-11T13:25:19.000Z" title="发表于 2023-02-11 21:25:19">2023-02-11</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/02/11/JavaScript%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E2%80%94%E2%80%94DOM%E4%BA%8B%E4%BB%B6%E9%AB%98%E7%BA%A7/" title="JavaScript学习笔记——DOM事件高级">JavaScript学习笔记——DOM事件高级</a><time datetime="2023-02-11T13:20:03.000Z" title="发表于 2023-02-11 21:20:03">2023-02-11</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/02/08/%E9%94%99%E8%AF%AF%E8%AE%B0%E5%BD%95%E2%80%94%E2%80%94%E4%BA%AC%E4%B8%9C%E6%94%BE%E5%A4%A7%E9%95%9C/" title="错误记录——京东放大镜">错误记录——京东放大镜</a><time datetime="2023-02-08T07:06:06.000Z" title="发表于 2023-02-08 15:06:06">2023-02-08</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/02/05/DOM%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E2%80%94%E2%80%94%E6%8E%92%E4%BB%96%E6%80%9D%E6%83%B3/" title="DOM学习笔记——排他思想">DOM学习笔记——排他思想</a><time datetime="2023-02-05T01:51:02.000Z" title="发表于 2023-02-05 09:51:02">2023-02-05</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2023 By Liu Hanzhang</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.min.js"></script><div class="js-pjax"></div><script src="https://cdn.staticaly.com/gh/haonan15/CDN@main/source/waterfall.min.js"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
