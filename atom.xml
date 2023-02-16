@@ -6,7 +6,7 @@
   <link href="http://localhost:4000/atom.xml" rel="self"/>
   
   <link href="http://localhost:4000/"/>
-  <updated>2023-02-11T13:32:13.688Z</updated>
+  <updated>2023-02-16T14:16:22.475Z</updated>
   <id>http://localhost:4000/</id>
   
   <author>
@@ -15,6 +15,31 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>移动web开发笔记——视口和二倍图</title>
+    <link href="http://localhost:4000/2023/02/16/%E7%A7%BB%E5%8A%A8web%E5%BC%80%E5%8F%91%E7%AC%94%E8%AE%B0%E2%80%94%E2%80%94%E8%A7%86%E5%8F%A3%E5%92%8C%E4%BA%8C%E5%80%8D%E5%9B%BE/"/>
+    <id>http://localhost:4000/2023/02/16/%E7%A7%BB%E5%8A%A8web%E5%BC%80%E5%8F%91%E7%AC%94%E8%AE%B0%E2%80%94%E2%80%94%E8%A7%86%E5%8F%A3%E5%92%8C%E4%BA%8C%E5%80%8D%E5%9B%BE/</id>
+    <published>2023-02-16T03:34:34.000Z</published>
+    <updated>2023-02-16T14:16:22.475Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="1-视口"><a href="#1-视口" class="headerlink" title="1. 视口"></a>1. 视口</h2><p>视口就是浏览器显示页面内容的屏幕区域，视口可以分为布局视口，视觉视口，理想视口</p><h3 id="1-1-布局视口layout-viewport"><a href="#1-1-布局视口layout-viewport" class="headerlink" title="1.1 布局视口layout viewport"></a>1.1 布局视口layout viewport</h3><p><img src="/2023/02/16/%E7%A7%BB%E5%8A%A8web%E5%BC%80%E5%8F%91%E7%AC%94%E8%AE%B0%E2%80%94%E2%80%94%E8%A7%86%E5%8F%A3%E5%92%8C%E4%BA%8C%E5%80%8D%E5%9B%BE/image-20230214215723637.png"></p><h3 id="1-2-视觉视口-visual-viewport"><a href="#1-2-视觉视口-visual-viewport" class="headerlink" title="1.2 视觉视口 visual viewport"></a>1.2 视觉视口 visual viewport</h3><p><img src="/2023/02/16/%E7%A7%BB%E5%8A%A8web%E5%BC%80%E5%8F%91%E7%AC%94%E8%AE%B0%E2%80%94%E2%80%94%E8%A7%86%E5%8F%A3%E5%92%8C%E4%BA%8C%E5%80%8D%E5%9B%BE/image-20230214215813845.png"></p><h3 id="1-3-理想视口-ideal-viewport"><a href="#1-3-理想视口-ideal-viewport" class="headerlink" title="1.3 理想视口 ideal viewport"></a>1.3 理想视口 ideal viewport</h3><p><img src="/2023/02/16/%E7%A7%BB%E5%8A%A8web%E5%BC%80%E5%8F%91%E7%AC%94%E8%AE%B0%E2%80%94%E2%80%94%E8%A7%86%E5%8F%A3%E5%92%8C%E4%BA%8C%E5%80%8D%E5%9B%BE/image-20230214215915931.png"></p><h3 id="1-4-总结"><a href="#1-4-总结" class="headerlink" title="1.4 总结"></a>1.4 总结</h3><img src="/2023/02/16/%E7%A7%BB%E5%8A%A8web%E5%BC%80%E5%8F%91%E7%AC%94%E8%AE%B0%E2%80%94%E2%80%94%E8%A7%86%E5%8F%A3%E5%92%8C%E4%BA%8C%E5%80%8D%E5%9B%BE/image-20230214220123417.png" style="zoom:67%;"><h3 id="1-5-meta视口标签"><a href="#1-5-meta视口标签" class="headerlink" title="1.5 meta视口标签"></a>1.5 meta视口标签</h3><p><code>&lt;meta name=&quot;viewport&quot; content=&quot;width=devide-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0&quot;&gt;</code></p><p><img src="/2023/02/16/%E7%A7%BB%E5%8A%A8web%E5%BC%80%E5%8F%91%E7%AC%94%E8%AE%B0%E2%80%94%E2%80%94%E8%A7%86%E5%8F%A3%E5%92%8C%E4%BA%8C%E5%80%8D%E5%9B%BE/image-20230214220401445.png"></p><h3 id="1-6-标准的viewport设置"><a href="#1-6-标准的viewport设置" class="headerlink" title="1.6 标准的viewport设置"></a>1.6 标准的viewport设置</h3><img src="/2023/02/16/%E7%A7%BB%E5%8A%A8web%E5%BC%80%E5%8F%91%E7%AC%94%E8%AE%B0%E2%80%94%E2%80%94%E8%A7%86%E5%8F%A3%E5%92%8C%E4%BA%8C%E5%80%8D%E5%9B%BE/image-20230214220830485.png" style="zoom: 67%;"><h2 id="2-二倍图"><a href="#2-二倍图" class="headerlink" title="2. 二倍图"></a>2. 二倍图</h2><h3 id="2-1-物理像素-物理像素比"><a href="#2-1-物理像素-物理像素比" class="headerlink" title="2.1 物理像素 物理像素比"></a>2.1 物理像素 物理像素比</h3><p><img src="/2023/02/16/%E7%A7%BB%E5%8A%A8web%E5%BC%80%E5%8F%91%E7%AC%94%E8%AE%B0%E2%80%94%E2%80%94%E8%A7%86%E5%8F%A3%E5%92%8C%E4%BA%8C%E5%80%8D%E5%9B%BE/image-20230215094502107.png"></p><h3 id="2-2-多倍图"><a href="#2-2-多倍图" class="headerlink" title="2.2 多倍图"></a>2.2 多倍图</h3><p><img src="/2023/02/16/%E7%A7%BB%E5%8A%A8web%E5%BC%80%E5%8F%91%E7%AC%94%E8%AE%B0%E2%80%94%E2%80%94%E8%A7%86%E5%8F%A3%E5%92%8C%E4%BA%8C%E5%80%8D%E5%9B%BE/image-20230215095603525.png"></p><h3 id="2-3-背景缩放-background-size"><a href="#2-3-背景缩放-background-size" class="headerlink" title="2.3 背景缩放 background-size"></a>2.3 背景缩放 background-size</h3><p><code>background-size: 背景图片宽度 背景图片高度</code></p><ul><li><p>只写一个参数，就是宽度，高度省略了，会等比例缩放</p></li><li><p>里面的单位可以跟百分比，是相对于父盒子来说的</p></li><li><p>属性值为cover 高度宽度等比例拉伸，图片将盒子完全覆盖，图片可能会显示不全</p></li><li><p>属性值为contain 高度宽度等比例拉伸，图片完全显示，但是盒子可能不会完全覆盖</p></li></ul>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h2 id=&quot;1-视口&quot;&gt;&lt;a href=&quot;#1-视口&quot; class=&quot;headerlink&quot; title=&quot;1. 视口&quot;&gt;&lt;/a&gt;1. 视口&lt;/h2&gt;&lt;p&gt;视口就是浏览器显示页面内容的屏幕区域，视口可以分为布局视口，视觉视口，理想视口&lt;/p&gt;
+&lt;h3 id=&quot;1-1-布局视口</summary>
+      
+    
+    
+    
+    <category term="移动web开发" scheme="http://localhost:4000/categories/%E7%A7%BB%E5%8A%A8web%E5%BC%80%E5%8F%91/"/>
+    
+    
+    <category term="视口" scheme="http://localhost:4000/tags/%E8%A7%86%E5%8F%A3/"/>
+    
+  </entry>
   
   <entry>
     <title>JavaScript学习笔记——PC端网页特效</title>
